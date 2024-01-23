@@ -35,6 +35,10 @@ jobs:
           unzip $credits_name
           unzip $forex_name
           unzip $rates_name
+          rm $commods_name
+          rm $credits_name
+          rm $forex_name
+          rm $rates_name
       - name: Commit and push files
         run: |
           git config --local user.name "AutoBot"

@@ -1,0 +1,43 @@
+name: Scrape latest data
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 8 * * *'
+
+jobs:
+  scheduled:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Scrape data
+        run: |
+          yest_date=$(date -d '-1 day' '+%Y_%m_%d')
+          commods_name="CFTC_CUMULATIVE_COMMODITIES_${yest_date}.zip"
+          commods_url="kgc0418-tdw-data-0.s3.amazonaws.com/cftc/eod/CFTC_CUMULATIVE_COMMODITIES_$temp1.zip"
+          credits_name="CFTC_CUMULATIVE_CREDITS_${yest_date}.zip"
+          credits_url="kgc0418-tdw-data-0.s3.amazonaws.com/cftc/eod/CFTC_CUMULATIVE_CREDITS_$temp1.zip"
+          forex_name="CFTC_CUMULATIVE_FOREX_${yest_date}.zip"
+          forex_url="kgc0418-tdw-data-0.s3.amazonaws.com/cftc/eod/CFTC_CUMULATIVE_FOREX_$temp1.zip"
+          rates_name="CFTC_CUMULATIVE_RATES_${yest_date}.zip"
+          rates_url="kgc0418-tdw-data-0.s3.amazonaws.com/cftc/eod/CFTC_CUMULATIVE_RATES_$temp1.zip"
+          curl $commods_url --output $commods_name
+          curl $credits_url --output $credits_name
+          curl $forex_url --output $forex_name
+          curl $rates_url --output $rates_name
+          unzip $commods_name
+          unzip $credits_name
+          unzip $forex_name
+          unzip $rates_name
+      - name: Commit and push files
+        run: |
+          git config --local user.name "AutoBot"
+          git config --local user.email "actions@noreply.github.com"
+          git add .
+          git commit -m "Update data"
+          git push

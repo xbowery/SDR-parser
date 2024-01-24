@@ -2,13 +2,11 @@ import os
 import pandas as pd
 import streamlit as st
 
-from datetime import datetime, timedelta
-from dotenv import load_dotenv
+from datetime import datetime
 from pymongo import MongoClient
 
-load_dotenv()
 
-mongourl = os.getenv('MONGOURL')
+mongourl = os.environ['mongourl']
 
 client = MongoClient(mongourl)
 

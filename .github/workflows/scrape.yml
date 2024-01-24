@@ -42,15 +42,6 @@ jobs:
           rm $credits_name
           rm $forex_name
           rm $rates_name
-      - name: Install python dependencies
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.8
-          cache: pip
-      - run: pip3 install -r requirements.txt
-      - name: Update database
-        run: |
-          python3 web_database.py
       - name: Commit and push files
         run: |
           git config --local user.name "AutoBot"
@@ -58,3 +49,14 @@ jobs:
           git add .
           git commit -m "Update data"
           git push
+      - name: Install python dependencies
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.8
+          cache: pip
+      - run: pip3 install -r requirements.txt
+      - name: Update database
+        env:
+          MONGOURL: ${{ secrets.MONGOURL }}
+        run: |
+          python3 web_database.py

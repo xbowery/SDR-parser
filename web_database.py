@@ -1,14 +1,11 @@
 from datetime import datetime, timedelta
-from dotenv import load_dotenv
 from pymongo import MongoClient
 
 import numpy as np
 import os
 import pandas as pd
 
-load_dotenv("./.env.prod")
-
-mongourl = os.getenv('MONGOURL')
+mongourl = os.environ['MONGOURL']
 client = MongoClient(mongourl)
 
 

@@ -21,8 +21,8 @@ def save_to_db_general(start_date, end_date):
         db = client[asset]
         for date in pd.date_range(start_date, end_date):
             date = date.strftime('%Y_%m_%d')
-            if os.path.isfile(f'data\\{asset}\\CFTC_CUMULATIVE_{asset}_{date}.csv'):
-                df = pd.read_csv(f'data\\{asset}\\CFTC_CUMULATIVE_{asset}_{date}.csv', low_memory=False)
+            if os.path.isfile(f'..\\data\\CFTC_CUMULATIVE_{asset}_{date}.csv'):
+                df = pd.read_csv(f'..\\data\\CFTC_CUMULATIVE_{asset}_{date}.csv', low_memory=False)
                 df['_id'] = df['Dissemination Identifier']
                 df['Effective Date'] = pd.to_datetime(df['Effective Date'])
                 df['Event timestamp'] = pd.to_datetime(df['Event timestamp'])
@@ -42,7 +42,7 @@ def save_to_db_general(start_date, end_date):
                     id_trackers[asset].append(record['_id'])
 
                 db['all_records'].insert_many(df.to_dict('records'))
-                os.remove(f'data\\{asset}\\CFTC_CUMULATIVE_{asset}_{date}.csv')
+                os.remove(f'..\\data\\CFTC_CUMULATIVE_{asset}_{date}.csv')
 
 
 def indexing_process():

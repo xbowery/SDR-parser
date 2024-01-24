@@ -15,7 +15,7 @@ for asset in ASSET_CLASSES:
     client.drop_database(asset)
 
     file_date = (datetime.today() - timedelta(days=1)).strftime('%Y_%m_%d')
-    file_name = f"data\\CFTC_CUMULATIVE_{asset}_{file_date}.csv"
+    file_name = f"CFTC_CUMULATIVE_{asset}_{file_date}.csv"
 
     df = pd.read_csv(file_name, low_memory=False)
     df['Event timestamp'] = pd.to_datetime(df['Event timestamp'])

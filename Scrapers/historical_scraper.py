@@ -18,5 +18,5 @@ for asset_class in ASSET_CLASSES:
         
         if r.status_code == 200:
             with zipfile.ZipFile(io.BytesIO(r.content)) as z:
-                z.extractall(f'..\\Data\\{asset_class}')
+                z.extractall(f'..\\data\\{asset_class}')
 

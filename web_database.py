@@ -6,7 +6,7 @@ import numpy as np
 import os
 import pandas as pd
 
-load_dotenv()
+load_dotenv("./.env.prod")
 
 mongourl = os.getenv('MONGOURL')
 client = MongoClient(mongourl)

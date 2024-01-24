@@ -17,7 +17,7 @@ ASSET_CLASSES = ['COMMODITIES', 'CREDITS', 'FOREX', 'RATES']
 for asset in ASSET_CLASSES:
     client.drop_database(asset)
 
-    file_date = (datetime.today() - timedelta(days=2)).strftime('%Y_%m_%d')
+    file_date = (datetime.today() - timedelta(days=1)).strftime('%Y_%m_%d')
     file_name = f"data\\CFTC_CUMULATIVE_{asset}_{file_date}.csv"
 
     df = pd.read_csv(file_name, low_memory=False)

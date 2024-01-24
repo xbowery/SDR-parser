@@ -18,6 +18,7 @@ jobs:
           fetch-depth: 0
       - name: Scrape data
         run: |
+          rm -rf data
           yest_date=$(date -d '-1 day' '+%Y_%m_%d')
           commods_name="CFTC_CUMULATIVE_COMMODITIES_${yest_date}.zip"
           commods_url="kgc0418-tdw-data-0.s3.amazonaws.com/cftc/eod/CFTC_CUMULATIVE_COMMODITIES_${yest_date}.zip"

@@ -52,5 +52,3 @@ for asset in ASSET_CLASSES:
     db['all_records'].insert_many(df_dict)
 
     db['all_records'].create_index({'Event timestamp': 1})
-
-    os.remove(file_name)

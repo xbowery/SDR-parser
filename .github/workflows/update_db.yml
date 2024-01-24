@@ -11,8 +11,6 @@ jobs:
     steps:
       - name: Check out this repo
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: Install python dependencies
         uses: actions/setup-python@v5
         with:

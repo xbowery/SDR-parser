@@ -1,23 +1,52 @@
 rm -f *.csv
 yest_date=$(date -d '-1 day' '+%Y_%m_%d')
-commods_name="CFTC_CUMULATIVE_COMMODITIES_${yest_date}.zip"
-commods_url="kgc0418-tdw-data-0.s3.amazonaws.com/cftc/eod/CFTC_CUMULATIVE_COMMODITIES_${yest_date}.zip"
-credits_name="CFTC_CUMULATIVE_CREDITS_${yest_date}.zip"
-credits_url="kgc0418-tdw-data-0.s3.amazonaws.com/cftc/eod/CFTC_CUMULATIVE_CREDITS_${yest_date}.zip"
-forex_name="CFTC_CUMULATIVE_FOREX_${yest_date}.zip"
-forex_url="kgc0418-tdw-data-0.s3.amazonaws.com/cftc/eod/CFTC_CUMULATIVE_FOREX_${yest_date}.zip"
-rates_name="CFTC_CUMULATIVE_RATES_${yest_date}.zip"
-rates_url="kgc0418-tdw-data-0.s3.amazonaws.com/cftc/eod/CFTC_CUMULATIVE_RATES_${yest_date}.zip"
+
+name_concat() {
+    local input_string=$1
+    local first_part="CFTC_CUMULATIVE_"
+    local second_part="${yest_date}.zip"
+
+    # Concatenate the strings
+    local result="$first_part$input_string"_"$second_part"
+
+    # Return the result
+    echo "$result"
+}
+
+url_concat() {
+    local input_string=$1
+    local first_part="kgc0418-tdw-data-0.s3.amazonaws.com/cftc/eod/CFTC_CUMULATIVE_"
+    local second_part="${yest_date}.zip"
+
+    # Concatenate the strings
+    local result="$first_part$input_string"_"$second_part"
+
+    # Return the result
+    echo "$result"
+
+}
+
+action() {
+    local input_one=$1
+    local input_two=$2
+
+    curl $input_one --output $input_two
+    unzip $input_two
+    rm $input_two
+}
+
+commods_name=$(name_concat "COMMODITIES")
+commods_url=$(url_concat "COMMODITIES")
+credits_name=$(name_concat "CREDITS")
+credits_url=$(url_concat "CREDITS")
+forex_name=$(name_concat "FOREX")
+forex_url=$(url_concat "FOREX")
+rates_name=$(name_concat "RATES")
+rates_url=$(url_concat "RATES")
+
 mkdir -p data
-curl $commods_url --output $commods_name
-curl $credits_url --output $credits_name
-curl $forex_url --output $forex_name
-curl $rates_url --output $rates_name
-unzip $commods_name
-unzip $credits_name
-unzip $forex_name
-unzip $rates_name
-rm $commods_name
-rm $credits_name
-rm $forex_name
-rm $rates_name
+
+action $commods_url $commods_name
+action $credits_url $credits_name
+action $forex_url $forex_name
+action $rates_url $rates_name

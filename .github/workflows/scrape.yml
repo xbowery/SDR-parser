@@ -49,14 +49,3 @@ jobs:
           git add .
           git commit -m "Update data"
           git push
-      - name: Install python dependencies
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.8
-          cache: pip
-      - run: pip3 install -r requirements.txt
-      - name: Update database
-        env:
-          MONGOURL: ${{ secrets.MONGOURL }}
-        run: |
-          python3 web_database.py

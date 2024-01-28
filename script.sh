@@ -1,4 +1,4 @@
-rm -f *.csv
+rm --f ./*.csv
 yest_date=$(date -d '-1 day' '+%Y_%m_%d')
 
 name_concat() {

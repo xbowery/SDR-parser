@@ -45,7 +45,7 @@ if button:
     df['Asset Class'] = df['Trade Structure'].str.split(':').str[0]
     df['Trade Structure'] = df['Trade Structure'].str.split(':').str[1:]
 
-    df = df[['_id', 'Asset Class', 'Trade Structure', 'Call amount-Leg 1', 'Call amount-Leg 2', 'Call currency-Leg 1', 'Call currency-Leg 2',
+    df = df[['_id', 'Asset Class', 'Trade Structure',
             'Effective Date', 'Event timestamp', 'Exchange rate', 'Exchange rate basis', 'Execution Timestamp',
             'Expiration Date', 'Fixed rate-Leg 1', 'Fixed rate-Leg 2', 'Notional amount-Leg 1',
             'Notional amount-Leg 2', 'Notional currency-Leg 1', 'Notional currency-Leg 2',

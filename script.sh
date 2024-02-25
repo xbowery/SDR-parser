@@ -15,7 +15,7 @@ name_concat() {
 
 url_concat() {
     local input_string=$1
-    local first_part="kgc0418-tdw-data-0.s3.amazonaws.com/cftc/eod/CFTC_CUMULATIVE_"
+    local first_part="https://pddata.dtcc.com/ppd/api/report/cumulative/cftc/CFTC_CUMULATIVE_"
     local second_part="${yest_date}.zip"
 
     # Concatenate the strings

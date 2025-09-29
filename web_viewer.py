@@ -44,7 +44,7 @@ if button:
 
     df.rename(columns={'Product name': 'Trade Structure'}, inplace=True)
     df['Asset Class'] = df['Asset Class'].map(asset_class)
-    if ':' in df['Trade Structure'].str:
+    if df['Trade Structure'].str.contains(':'):
         df['Trade Structure'] = df['Trade Structure'].str.split(':').str[1:]
 
     df = df[['_id', 'Asset Class', 'Trade Structure',

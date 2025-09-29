@@ -44,9 +44,11 @@ if button:
 
     df.rename(columns={'Product name': 'Trade Structure'}, inplace=True)
     df['Asset Class'] = df['Asset Class'].map(asset_class)
-    if df['Trade Structure'].str.contains(':'):
+    try:
         df['Trade Structure'] = df['Trade Structure'].str.split(':').str[1:]
-
+    except:
+        pass
+    
     df = df[['_id', 'Asset Class', 'Trade Structure',
             'Effective Date', 'Event timestamp', 'Exchange rate', 'Exchange rate basis', 'Execution Timestamp',
             'Expiration Date', 'Fixed rate-Leg 1', 'Fixed rate-Leg 2', 'Notional amount-Leg 1',

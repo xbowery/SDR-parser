@@ -43,7 +43,7 @@ if button:
         df = pd.concat([df, temp_df])
 
     df.rename(columns={'Product name': 'Trade Structure'}, inplace=True)
-    df['Asset Class'] = asset_class[df['Trade Structure'].str]
+    df['Asset Class'] = df['Asset Class'].map(asset_class)
     if ':' in df['Trade Structure'].str:
         df['Trade Structure'] = df['Trade Structure'].str.split(':').str[1:]
 

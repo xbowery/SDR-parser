@@ -21,6 +21,7 @@ end_date = st.date_input('Select the ending date: ', datetime.today())
 
 button = st.button('Submit')
 
+asset_class = {'CO': 'Commodity', 'CR': 'Credit', 'FX': 'Forex', 'IR': 'Interest Rates'}
 
 if button:
     df = pd.DataFrame()
@@ -42,8 +43,9 @@ if button:
         df = pd.concat([df, temp_df])
 
     df.rename(columns={'Product name': 'Trade Structure'}, inplace=True)
-    df['Asset Class'] = df['Trade Structure'].str.split(':').str[0]
-    df['Trade Structure'] = df['Trade Structure'].str.split(':').str[1:]
+    df['Asset Class'] = asset_class[df['Trade Structure'].str]
+    if ':' in df['Trade Structure'].str:
+        df['Trade Structure'] = df['Trade Structure'].str.split(':').str[1:]
 
     df = df[['_id', 'Asset Class', 'Trade Structure',
             'Effective Date', 'Event timestamp', 'Exchange rate', 'Exchange rate basis', 'Execution Timestamp',

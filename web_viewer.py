@@ -21,7 +21,7 @@ end_date = st.date_input('Select the ending date: ', datetime.today())
 
 button = st.button('Submit')
 
-asset_class = {'CO': 'Commodity', 'CR': 'Credit', 'FX': 'Forex', 'IR': 'Interest Rates'}
+asset_class = {'CO': 'Commodity', 'CR': 'Credit', 'FX': 'Forex', 'IR': 'Rates'}
 
 if button:
     df = pd.DataFrame()
